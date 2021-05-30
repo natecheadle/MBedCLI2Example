@@ -1,0 +1,60 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Target",
+            "type": "shell",
+            "group": "build",
+            "command": "mbed-tools compile -m ${input:BUILD_TARGET} -t GCC_ARM -b ${input:BUILD_TYPE}",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Rebuild Target",
+            "type": "shell",
+            "group": "build",
+            "command": "mbed-tools compile -m ${input:BUILD_TARGET} -t GCC_ARM --clean -b ${input:BUILD_TYPE}",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Flash Target",
+            "type": "shell",
+            "command": "mbed-tools compile -m ${input:BUILD_TARGET} -t GCC_ARM -f",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Flash and Monitor Target",
+            "type": "shell",
+            "command": "mbed-tools compile -m ${input:BUILD_TARGET} -t GCC_ARM -f --sterm --baudrate 9600",
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+    ],
+    "inputs": [
+        {
+          "id": "BUILD_TYPE",
+          "type": "pickString",
+          "description": "Build for Debug or Release",
+          "options": [
+              "debug",
+              "release"
+          ]
+        },
+        {
+            "id": "BUILD_TARGET",
+            "type": "pickString",
+            "description": "Build Target (ex. F303RE)",
+            "options": [
+                "NUCLEO_F303RE"
+            ]
+        }
+    ]
+}
